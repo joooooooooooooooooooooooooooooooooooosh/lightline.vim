@@ -90,7 +90,7 @@ endfunction
 let s:_lightline = {
       \   'active': {
       \     'left': [['mode', 'paste'], ['readonly', 'filename', 'modified']],
-      \     'right': [['lineinfo'], ['percent'], ['fileformat', 'fileencoding', 'filetype']]
+      \     'right': [['lineinfo'], ['percent'], ['zoom', 'spell', 'fileformat', 'fileencoding', 'filetype'], ['obsession']]
       \   },
       \   'inactive': {
       \     'left': [['filename']],
@@ -110,12 +110,15 @@ let s:_lightline = {
       \     'paste': '%{&paste?"PASTE":""}', 'readonly': '%R', 'charvalue': '%b', 'charvaluehex': '%B',
       \     'spell': '%{&spell?&spelllang:""}', 'fileencoding': '%{&fenc!=#""?&fenc:&enc}', 'fileformat': '%{&ff}',
       \     'filetype': '%{&ft!=#""?&ft:"no ft"}', 'percent': '%3p%%', 'percentwin': '%P',
-      \     'lineinfo': '%3l:%-2c', 'line': '%l', 'column': '%c', 'close': '%999X X ', 'winnr': '%{winnr()}'
+      \     'lineinfo': '%3l:%-2c', 'line': '%l', 'column': '%c', 'close': '%999X X ', 'winnr': '%{winnr()}', 
+      \     'obsession': '%{ObsessionStatus()}'
       \   },
       \   'component_visible_condition': {
       \     'modified': '&modified||!&modifiable', 'readonly': '&readonly', 'paste': '&paste', 'spell': '&spell'
       \   },
-      \   'component_function': {},
+      \   'component_function': {
+      \     'zoom': 'zoomwintab#Status'
+      \   },
       \   'component_function_visible_condition': {},
       \   'component_expand': {
       \     'tabs': 'lightline#tabs'
