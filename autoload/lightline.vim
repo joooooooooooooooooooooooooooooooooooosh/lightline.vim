@@ -42,6 +42,22 @@ function! lightline#update_disable() abort
   endif
 endfunction
 
+function MyFugitiveHead()
+  let head = FugitiveHead()
+  if head != ""
+    let head = "\uf126 " .. head
+  endif
+  return head
+endfunction
+
+function AutoFmtDisabled()
+  if g:disable_autofmt == 1
+    return "no autofmt"
+  else
+    return ""
+  endif
+endfunction
+
 function! lightline#enable() abort
   let s:_ = 1
   call lightline#update()
@@ -90,7 +106,7 @@ endfunction
 let s:_lightline = {
       \   'active': {
       \     'left': [['mode', 'paste'], ['readonly', 'filename', 'modified']],
-      \     'right': [['lineinfo'], ['percent'], ['zoom', 'spell', 'fileformat', 'fileencoding', 'filetype'], ['obsession']]
+      \     'right': [['lineinfo'], ['percent'], ['zoom', 'autofmt', 'spell', 'fileformat', 'fileencoding', 'filetype'], ['gitbranch', 'obsession']]
       \   },
       \   'inactive': {
       \     'left': [['filename']],
@@ -117,7 +133,9 @@ let s:_lightline = {
       \     'modified': '&modified||!&modifiable', 'readonly': '&readonly', 'paste': '&paste', 'spell': '&spell'
       \   },
       \   'component_function': {
-      \     'zoom': 'zoomwintab#Status'
+      \     'zoom': 'zoomwintab#Status',
+      \     'gitbranch': 'MyFugitiveHead',
+      \     'autofmt': 'AutoFmtDisabled'
       \   },
       \   'component_function_visible_condition': {},
       \   'component_expand': {
